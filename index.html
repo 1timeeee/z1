@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IP Information</title>
+  <style>
+    /* إعدادات الخلفية */
+    body {
+      margin: 0;
+      background-color: black; /* تغيير اللون إلى الأسود */
+      color: white; /* تغيير لون النص إلى الأبيض */
+      font-family: 'Courier New', monospace;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* إعدادات الصورة */
+    .image-container {
+      margin-bottom: 20px;
+      border: 3px solid white; /* تغيير لون الحدود إلى الأبيض */
+      padding: 10px;
+      border-radius: 10px;
+    }
+
+    .image-container img {
+      width: 100%;
+      max-width: 400px;
+      border-radius: 10px;
+    }
+
+    /* إعدادات النص */
+    .info {
+      text-align: center;
+      color: white; /* لون النص الأبيض */
+      font-size: 18px;
+      margin-top: 10px;
+    }
+
+    .discord-link {
+      font-size: 36px; /* تم تكبير الحجم هنا */
+      color: white; /* لون النص الأبيض */
+      margin-top: 20px;
+      text-decoration: none;
+      font-weight: bold; /* لجعل النص أكثر وضوحًا */
+    }
+
+    /* إعدادات النص الجديد */
+    .additional-text {
+      margin-top: 10px;
+      font-size: 30px; /* تكبير حجم النص */
+      text-align: center;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- صورة -->
+  <div class="image-container">
+    <img src="https://media.discordapp.net/attachments/1294666102714007637/1303663531668934696/image.png?ex=67387046&is=67371ec6&hm=b27fe1f316d428645b91d9d9b7c773dcf3345023c0b30ea66d67f9e2b4ca3058&=&format=webp&quality=lossless&width=1440&height=597" alt="Banner Image">
+  </div>
+
+  <!-- نص إضافي تحت الصورة -->
+  <div class="additional-text">
+  Hacked By Mgnooon ! 
+  </div>
+
+  <!-- معلومات IP والموقع -->
+  <div class="info" id="ip-info">
+    <p>IP: </p>
+    <p>City: </p>
+    <p>Region: </p>
+    <p>Country: </p>
+    <p>Organization: </p>
+    <p>Timezone: </p>
+  </div>
+
+  <!-- رابط Discord -->
+  <a class="discord-link" href="https://discord.gg/q1" target="_blank">discord.gg/q1</a>
+
+  <!-- إضافة عنصر الصوت -->
+  <audio id="background-sound" loop>
+    <source src="https://cdn.discordapp.com/attachments/1221287953297440850/1296950628462886952/Nasa_Rp.mp4?ex=67386826&is=673716a6&hm=bcc304da6a2b603012bd451fa61f58040450ed20b2100392a977518969530619&https" type="audio/mp3">
+    Your browser does not support the audio element.
+  </audio>
+
+  <script>
+    // تشغيل الصوت تلقائيًا عند تحميل الصفحة
+    window.onload = function() {
+      var audio = document.getElementById('background-sound');
+      audio.play(); // تشغيل الصوت
+    };
+
+    // الحصول على بيانات IP وعرضها بدون الحاجة للتوكن
+    fetch('https://ipinfo.io/json')
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById('ip-info').innerHTML = `
+          <p>IP: ${data.ip}</p>
+          <p>City: ${data.city}</p>
+          <p>Region: ${data.region}</p>
+          <p>Country: ${data.country}</p>
+          <p>Organization: ${data.org}</p>
+          <p>Timezone: ${data.timezone}</p>
+        `;
+      })
+      .catch(error => console.error('Error fetching IP info:', error));
+  </script>
+</body>
+</html>
